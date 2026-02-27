@@ -1326,5 +1326,53 @@
       return;
     }
 
-    feedback.style.display = 'block';
-    feedback.style.background = 'rgba(13, 148,
+    var lastName = document.getElementById('lastName').value.trim();
+    var phone = document.getElementById('phone').value.trim();
+    var practiceName = document.getElementById('practiceName').value.trim();
+    var practiceSize = document.getElementById('practiceSize').value;
+    var message = document.getElementById('message').value.trim();
+
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+
+    fetch('https://formspree.io/f/xpqjnwzb', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        phone: phone,
+        practiceName: practiceName,
+        practiceSize: practiceSize,
+        message: message
+      })
+    }).then(function(response) {
+      var feedback = document.getElementById('formFeedback');
+      feedback.style.display = 'block';
+      if (response.ok) {
+        feedback.style.background = 'rgba(13, 148, 136, 0.15)';
+        feedback.style.color = '#0d9488';
+        feedback.textContent = "Thanks, " + firstName + "! We'll be in touch within 24 hours.";
+        btn.textContent = 'Message Sent ✓';
+      } else {
+        feedback.style.background = 'rgba(249, 112, 102, 0.15)';
+        feedback.style.color = '#f97066';
+        feedback.textContent = 'Something went wrong. Please try again or email us directly.';
+        btn.disabled = false;
+        btn.textContent = 'Send Message →';
+      }
+    }).catch(function() {
+      var feedback = document.getElementById('formFeedback');
+      feedback.style.display = 'block';
+      feedback.style.background = 'rgba(249, 112, 102, 0.15)';
+      feedback.style.color = '#f97066';
+      feedback.textContent = 'Connection error. Please try again.';
+      btn.disabled = false;
+      btn.textContent = 'Send Message →';
+    });
+  }
+</script>
+
+</body>
+</html>
