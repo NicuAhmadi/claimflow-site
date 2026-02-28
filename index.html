@@ -328,7 +328,8 @@
   }
 
   /* --- SECTIONS --- */
-  section { padding: 100px 40px; }
+  section { padding: 100px 40px; scroll-margin-top: 80px; }
+  .proof-bar { scroll-margin-top: 80px; }
   .section-label {
     font-size: 0.78rem;
     font-weight: 700;
@@ -921,15 +922,15 @@
 
 <!-- NAV -->
 <nav id="navbar">
-  <a class="nav-logo" onclick="scrollToSection('hero')">
+  <a class="nav-logo" href="#hero">
     <span class="logo-icon">CF</span>
     ClaimFlow
   </a>
   <div class="nav-links">
-    <a onclick="scrollToSection('how')">How It Works</a>
-    <a onclick="scrollToSection('features')">Features</a>
-    <a onclick="scrollToSection('carriers')">Carriers</a>
-    <a class="nav-cta" onclick="scrollToSection('contact')">Contact Us</a>
+    <a href="#how">How It Works</a>
+    <a href="#features">Features</a>
+    <a href="#carriers">Carriers</a>
+    <a class="nav-cta" href="#contact">Contact Us</a>
   </div>
 </nav>
 
@@ -942,8 +943,8 @@
   <h1>Stop paying a full-time biller to do <em>busywork</em></h1>
   <p class="hero-sub">ClaimFlow replaces the 40+ hours per week your office spends manually attaching X-rays, writing narratives, and chasing claims. It plugs into Eaglesoft and your clearinghouse — no new software to learn.</p>
   <div class="hero-ctas">
-    <a class="btn-primary" onclick="scrollToSection('contact')">Get in Touch →</a>
-    <a class="btn-secondary" onclick="scrollToSection('how')">See How It Works</a>
+    <a class="btn-primary" href="#contact">Get in Touch →</a>
+    <a class="btn-secondary" href="#how">See How It Works</a>
   </div>
   <div class="hero-values">
     <div class="hero-value">
@@ -1269,28 +1270,18 @@
 
 <!-- FOOTER -->
 <footer>
-  <p>&copy; 2026 ClaimFlow. All rights reserved. &nbsp;·&nbsp; <a href="/cdn-cgi/l/email-protection#b0d8d5dcdcdff0d3dcd1d9ddd6dcdfc79ed3dfdd"><span class="__cf_email__" data-cfemail="a8c0cdc4c4c7e8cbc4c9c1c5cec4c7df86cbc7c5">[email&#160;protected]</span></a></p>
+  <p>&copy; 2026 ClaimFlow. All rights reserved. &nbsp;·&nbsp; <a href="mailto:hello&#64;claimflow.com">hello&#64;claimflow.com</a></p>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  // Smooth scroll
-  function scrollToSection(id) {
-    const el = document.getElementById(id);
-    if (el) {
-      const offset = id === 'hero' ? 0 : 80;
-      const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
-      window.scrollTo({ top: top, behavior: 'smooth' });
-    }
-  }
-
+<script>
   // Nav scroll effect
-  const nav = document.getElementById('navbar');
+  var nav = document.getElementById('navbar');
   window.addEventListener('scroll', function() {
     nav.classList.toggle('scrolled', window.scrollY > 40);
   });
 
   // Scroll animation observer
-  const observer = new IntersectionObserver(function(entries) {
+  var observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
