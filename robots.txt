@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://claimflowpros.com/sitemap.xml
